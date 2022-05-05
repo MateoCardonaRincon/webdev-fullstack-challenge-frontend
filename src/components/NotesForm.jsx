@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react'
 import { Store } from "/src/context/StoreProvider"
 
-const Form = () => {
+const NotesForm = () => {
 
     // useRef hook to clean the inputs after adding a note
     const formRef = useRef(null)
@@ -49,6 +49,7 @@ const Form = () => {
 
             // Reset input values of the Form component   
             formRef.current.reset()
+            setCategory('')
         }
     }
 
@@ -70,7 +71,7 @@ const Form = () => {
                 <div className="row mb-3">
                     <label className="form-label">Category:</label>
                     <select className="form-select" type="select" name="category" onChange={addCategory} >
-                        <option value={null}>Choose...</option>
+                        <option value=''>Choose...</option>
                         {state.categories.map(category =>
                             <option value={category.id} key={category.id}>{category.description}</option>
                         )}
@@ -86,4 +87,4 @@ const Form = () => {
     )
 }
 
-export default Form
+export default NotesForm

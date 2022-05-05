@@ -25,7 +25,6 @@ const reducer = (state, action) => {
 
             const stateWithfetcheCategories = { ...state, categories: action.payload }
 
-
             return stateWithfetcheCategories
 
         // the fetched lists of NOTES is passed through the action.payload,
@@ -58,20 +57,38 @@ const reducer = (state, action) => {
         // All the NOTES related to the deleted CATEGORY are also deleted.
         case "delete-category":
 
-            return state
+            const categoryToDelete = action.payload
+
+            const listOfCategoriesAfterDelete = state.categories.filter((note) => note.id !== categoryToDelete.id)
+
+            const stateAfterDeleteCategory = { ...state, categories: listOfCategoriesAfterDelete }
+
+            return stateAfterDeleteCategory
 
         // the action.payload takes the NOTE object to be deleted, then the list of NOTES is filtered taking
         /// the NOTES with an id different from the one the payload has.
         case "delete-note":
 
-            return state
+            const noteToDelete = action.payload
+
+            const listOfNotesAfterDelete = state.notes.filter((note) => note.id !== noteToDelete.id)
+
+            const stateAfterDeleteNote = { ...state, notes: listOfNotesAfterDelete }
+
+            return stateAfterDeleteNote
 
         // the action.payload takes the NOTE object to be updated, then the list of NOTES is mapped, so that
         // all the NOTES keep being the same except for the NOTE that is being updated
         // A NOTE can only be updated if it isn't marked as done.
         case "update-note":
+            const updatedNote = action.payload
 
-            return state
+            const updatedListOfNotes = state.notes.map(
+                (note) => note.id === updatedNote.id ? updatedNote : note)
+
+            const stateAfterUpdateNote = { ...state, notes: updatedListOfNotes }
+
+            return stateAfterUpdateNote
     }
 }
 

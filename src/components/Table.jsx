@@ -9,10 +9,31 @@ const Table = (props) => {
 
     const notesToRender = state.notes.filter(note => note.fkCategoryId === category.id)
 
-    const onCheckbox = (e, note) => {
+    const onCheckbox = async (event, note) => {
+        const isChecked = event.currentTarget.checked;
+
+        const noteUpdatedFromForm = { ...note, done: isChecked }
+
+        // here, promises are treated using async/await and .then() approaches
+        let noteUpdated = await fetch("http://localhost:8081/api/update/note", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(noteUpdatedFromForm)
+        }).then(response => response.json());
+
+        dispatch({ type: "update-note", payload: noteUpdated })
     }
 
-    const onDelete = (e, note) => {
+    const onDelete = async (e, note) => {
+        let response = await fetch(`http://localhost:8081/api/delete/note/${note.id}`,
+            { method: "DELETE" });
+
+        // checks if the note was succesfully deleted on the DB, if so, the dispatch is triggered
+        if (response.status === 200) {
+            dispatch({ type: "delete-note", payload: { ...note } })
+        }
     }
 
     const onUpdate = (e, note) => {
@@ -20,13 +41,13 @@ const Table = (props) => {
 
     if (notesToRender.length > 0) {
         return (
-            <table className="table table-light table-hover table-striped">
+            <table className="table table-hover table-striped">
                 <thead><tr>
                     <th>id</th><th>title</th><th>message</th><th>done</th><th>delete</th><th>update</th>
                 </tr></thead>
                 <tbody>
                     {notesToRender.map(note => {
-                        return <tr key={`${category.id}-${note.id}`}>
+                        return <tr className={note.done ? "checked" : "unchecked"} key={`${category.id}-${note.id}`}>
                             <td>{note.id}</td>
                             <td>{note.title}</td>
                             <td>{note.message}</td>
