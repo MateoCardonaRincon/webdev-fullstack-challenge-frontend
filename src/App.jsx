@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { StoreProvider } from "/src/context/StoreProvider"
 import Form from "/src/components/Form"
 import CategoryList from "/src/components/CategoryList"

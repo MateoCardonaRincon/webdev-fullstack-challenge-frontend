@@ -1,13 +1,50 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+}
+
+.checked {
+  background-color: rgb(15, 142, 25);
+}
+
+.unchecked {
+  background-color: rgb(178, 177, 177);
+}
+
+.delete-btn {
+  align-items: center;
+  background-color: rgb(222, 73, 73);
+  border-radius: 5px;
+  border: 0px;
+  width: 30px;
+  height: 30px;
+}
+
+.delete-btn:hover {
+  background-color: rgb(223, 14, 14);
+}
+
+.update-btn {
+  border-radius: 5px;
+  border: 0px;
+  width: 30px;
+  height: 30px;
+}
+
+.update-btn:hover {
+  background-color: rgb(12, 60, 110);
 }

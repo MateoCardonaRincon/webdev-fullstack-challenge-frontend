@@ -6,7 +6,7 @@ const Form = () => {
     // useRef hook to clean the inputs after adding a note
     const formRef = useRef(null)
 
-    // useState hook to control the states of the two inputs in the Form component
+    // useState hook to control the states of the inputs in the Form component
     const [title, setTitle] = useState('')
     const [message, setMessage] = useState('')
     const [fkCategoryId, setCategory] = useState('')
@@ -30,7 +30,7 @@ const Form = () => {
         setCategory(parseInt(event.target.value))
     }
 
-    // Triggers the dispatch when add a new note with not empty title and message
+    // Triggers the dispatch when a new note is added with not empty title, message and category
     const onAdd = async (event) => {
         event.preventDefault();
         if (title && message && fkCategoryId) {
@@ -56,29 +56,30 @@ const Form = () => {
 
         <form className="form" ref={formRef}>
             <div className="container w-50 mt-5">
+
                 <div className="row mb-3">
                     <label className="form-label">Title:</label>
                     <input className="form-control" type="text" name="title" onChange={addTitle} />
                 </div>
+
                 <div className="row mb-3">
                     <label className="form-label">Message:</label>
                     <input className="form-control" type="text" name="message" onChange={addMessage} />
                 </div>
+
                 <div className="row mb-3">
                     <label className="form-label">Category:</label>
                     <select className="form-select" type="select" name="category" onChange={addCategory} >
-                        <option value="">Choose...</option>
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                        <option value={3}>3</option>
+                        <option value={null}>Choose...</option>
+                        {state.categories.map(category =>
+                            <option value={category.id} key={category.id}>{category.description}</option>
+                        )}
                     </select>
                 </div>
+                
                 <div className="row mb-3">
                     <button className="btn btn-primary" onClick={onAdd}>Add</button>
                 </div>
-
-
-
             </div>
         </form >
 

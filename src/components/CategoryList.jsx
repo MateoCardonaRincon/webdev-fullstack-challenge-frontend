@@ -7,7 +7,7 @@ const CategoryList = () => {
     const { state, dispatch } = useContext(Store)
 
     useEffect(() => {
-        let listOfNotes = fetchAllCategories().then(
+        fetchAllCategories().then(
             category => {
                 let action = {
                     type: "get-categories",
@@ -15,10 +15,25 @@ const CategoryList = () => {
                 }
                 dispatch(action)
             })
+
+        fetchAllNotes().then(
+            notes => {
+                let action = {
+                    type: "get-notes",
+                    payload: notes
+                }
+                dispatch(action)
+            })
     }, [])
 
     const fetchAllCategories = async () => {
         let response = await fetch("http://localhost:8081/api/get/categories")
+        let data = await response.json()
+        return data
+    }
+
+    const fetchAllNotes = async () => {
+        let response = await fetch("http://localhost:8081/api/get/notes")
         let data = await response.json()
         return data
     }
