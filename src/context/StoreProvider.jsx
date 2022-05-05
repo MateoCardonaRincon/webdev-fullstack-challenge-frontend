@@ -23,6 +23,6 @@ const StoreProvider = ({ children }) => {
     )
 }
 
-export default StoreProvider
+export { StoreProvider }
 
 export { Store, initialState }
