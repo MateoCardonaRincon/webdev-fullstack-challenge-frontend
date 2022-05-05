@@ -37,8 +37,13 @@ const reducer = (state, action) => {
         // as the post request returns the created CATEGORY object, this response is sent through the action.payload
         // to update the CATEGORIES in the state of the context
         case "add-category":
+            const newCategory = action.payload
 
-            return state
+            const newListOfCategories = [...state.categories, newCategory]
+
+            const stateAfterAddCategorye = { ...state, categories: newListOfCategories }
+
+            return stateAfterAddCategorye
 
         // as the post request returns the created NOTE object, this response is sent through the action.payload
         // to update the NOTES in the state of the context

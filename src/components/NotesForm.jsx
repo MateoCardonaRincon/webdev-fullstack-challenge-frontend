@@ -54,36 +54,37 @@ const NotesForm = () => {
     }
 
     return (
+        <>
+            <h1>Create a new note</h1>
+            <form className="form" ref={formRef}>
+                <div className="container w-50 mt-5">
 
-        <form className="form" ref={formRef}>
-            <div className="container w-50 mt-5">
+                    <div className="row mb-3">
+                        <label className="form-label label">Title:</label>
+                        <input className="form-control" type="text" name="title" onChange={addTitle} />
+                    </div>
 
-                <div className="row mb-3">
-                    <label className="form-label">Title:</label>
-                    <input className="form-control" type="text" name="title" onChange={addTitle} />
+                    <div className="row mb-3">
+                        <label className="form-label label">Message:</label>
+                        <input className="form-control" type="text" name="message" onChange={addMessage} />
+                    </div>
+
+                    <div className="row mb-3">
+                        <label className="form-label label">Category:</label>
+                        <select className="form-select" type="select" name="category" onChange={addCategory} >
+                            <option value=''>Choose...</option>
+                            {state.categories.map(category =>
+                                <option value={category.id} key={category.id}>{category.description}</option>
+                            )}
+                        </select>
+                    </div>
+
+                    <div className="row mb-3">
+                        <button className="btn btn-primary" onClick={onAdd}>Add</button>
+                    </div>
                 </div>
-
-                <div className="row mb-3">
-                    <label className="form-label">Message:</label>
-                    <input className="form-control" type="text" name="message" onChange={addMessage} />
-                </div>
-
-                <div className="row mb-3">
-                    <label className="form-label">Category:</label>
-                    <select className="form-select" type="select" name="category" onChange={addCategory} >
-                        <option value=''>Choose...</option>
-                        {state.categories.map(category =>
-                            <option value={category.id} key={category.id}>{category.description}</option>
-                        )}
-                    </select>
-                </div>
-                
-                <div className="row mb-3">
-                    <button className="btn btn-primary" onClick={onAdd}>Add</button>
-                </div>
-            </div>
-        </form >
-
+            </form >
+        </>
     )
 }
 

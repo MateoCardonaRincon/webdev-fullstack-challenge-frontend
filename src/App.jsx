@@ -7,7 +7,7 @@ function App() {
 
   return (
     <StoreProvider>
-      <div className="container mt-5">
+      <div className="container">
         <div className="d-flex justify-content-center">
           <h1>To Do List Manager</h1>
         </div>

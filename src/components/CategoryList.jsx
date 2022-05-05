@@ -1,6 +1,7 @@
 import { Store } from '/src/context/StoreProvider'
 import React, { useContext, useEffect } from 'react'
 import Dropdown from "/src/components/Dropdown"
+import CategoryForm from "/src/components/CategoryForm"
 
 const CategoryList = () => {
 
@@ -39,12 +40,17 @@ const CategoryList = () => {
     }
 
     return (
-        <div className="accordion accordion-flush" id="accordionExample">
-            {state.categories.map(category =>
-                <Dropdown category={category}
-                    key={category.id} />
-            )}
+        <div className="category-div">
+            <h1>Your Categories</h1>
+            <CategoryForm />
+            <div className="accordion accordion-flush" id="accordionExample">
+                {state.categories.map(category =>
+                    <Dropdown category={category}
+                        key={category.id} />
+                )}
+            </div>
         </div>
+
     )
 }
 

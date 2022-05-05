@@ -43,7 +43,7 @@ const Table = (props) => {
         return (
             <table className="table table-hover table-striped">
                 <thead><tr>
-                    <th>id</th><th>title</th><th>message</th><th>done</th><th>delete</th><th>update</th>
+                    <th>Id</th><th>Title</th><th>Message</th><th>Done</th><th>Delete</th><th>Update</th>
                 </tr></thead>
                 <tbody>
                     {notesToRender.map(note => {

@@ -28,7 +28,7 @@ const Dropdown = (props) => {
         <div className="row">
             <div className="accordion-item mb-2">
                 <h2 className="accordion-header justify-content-around">
-                    <button className="accordion-button"
+                    <button className="accordion-button category-dropdown"
                         type="button"
                         onClick={toggleCollapse}>
                         {category.description}
