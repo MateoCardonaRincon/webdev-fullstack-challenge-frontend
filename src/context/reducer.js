@@ -23,13 +23,17 @@ const reducer = (state, action) => {
         // and stored in the context state using the spread operator
         case "get-categories":
 
-            return state
+            const stateWithfetcheCategories = { ...state, categories: action.payload }
+
+
+            return stateWithfetcheCategories
 
         // the fetched lists of NOTES is passed through the action.payload,
         // and stored in the context state using the spread operator
         case "get-notes":
+            const stateWithfetchedNotes = { ...state, notes: action.payload }
 
-            return state
+            return stateWithfetchedNotes
 
         // as the post request returns the created CATEGORY object, this response is sent through the action.payload
         // to update the CATEGORIES in the state of the context
@@ -41,7 +45,13 @@ const reducer = (state, action) => {
         // to update the NOTES in the state of the context
         case "add-note":
 
-            return state
+            const newNote = action.payload
+
+            const newListOfNotes = [...state.notes, newNote]
+
+            const stateAfterAddNote = { ...state, notes: newListOfNotes }
+
+            return stateAfterAddNote
 
         // the action.payload takes the CATEGORY object to be deleted, then the list of CATEGORIES is filtered
         // taking the CATEGORIES with an id different from the one the payload has.

@@ -33,8 +33,6 @@ const Form = () => {
     // Triggers the dispatch when add a new note with not empty title and message
     const onAdd = async (event) => {
         event.preventDefault();
-
-        console.log(fkCategoryId)
         if (title && message && fkCategoryId) {
 
             const noteFromForm = { title, message, fkCategoryId, done: false }

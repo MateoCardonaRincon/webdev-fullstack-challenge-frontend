@@ -5,7 +5,6 @@ import CategoryList from "/src/components/CategoryList"
 import "./index.css"
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <StoreProvider>
@@ -13,7 +12,6 @@ function App() {
         <div className="d-flex justify-content-center">
           <h1>To Do List Manager</h1>
         </div>
-
         <Form />
         <CategoryList />
       </div>
