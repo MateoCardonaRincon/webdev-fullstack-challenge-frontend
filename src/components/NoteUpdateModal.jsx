@@ -27,10 +27,10 @@ const UpdateNoteModal = (props) => {
             }).then(response => response.json());
 
             dispatch({ type: "update-note", payload: noteUpdated })
+            setShow(false)
+            setNewTitle('')
+            setNewMessage('')
         }
-        setShow(false)
-        setNewTitle('')
-        setNewMessage('')
     }
 
     const handleClose = () => {
@@ -48,6 +48,8 @@ const UpdateNoteModal = (props) => {
                 <Modal.Body>
                     <h6>You can update the title and message:</h6>
                     <NoteUpdateForm note={note}
+                        newTitle={newTitle}
+                        newMessage={newMessage}
                         setNewTitle={setNewTitle}
                         setNewMessage={setNewMessage} />
 

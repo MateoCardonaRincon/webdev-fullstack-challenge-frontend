@@ -68,3 +68,8 @@ h1 {
   font-weight: bold;
   font-size: 20px;
 }
+
+.update-span {
+  font-size: 12px;
+  color:rgb(34, 113, 192);
+}
