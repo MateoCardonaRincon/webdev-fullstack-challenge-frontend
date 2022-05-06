@@ -1,4 +1,5 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
+import UpdateNoteModal from '/src/components/UpdateNoteModal'
 import { Store } from '/src/context/StoreProvider'
 
 const Table = (props) => {
@@ -6,6 +7,10 @@ const Table = (props) => {
     const { category } = props
 
     const { state, dispatch } = useContext(Store)
+
+    const [show, setShow] = useState(false);
+
+    const [noteToUpdate, setNoteToUpdate] = useState({});
 
     const notesToRender = state.notes.filter(note => note.fkCategoryId === category.id)
 
@@ -29,7 +34,7 @@ const Table = (props) => {
     const onDelete = async (e, note) => {
         let response = await fetch(`http://localhost:8081/api/delete/note/${note.id}`,
             { method: "DELETE" });
-            
+
         // checks if the note was succesfully deleted on the DB, if so, the dispatch is triggered
         if (response.status === 200) {
             dispatch({ type: "delete-note", payload: { ...note } })
@@ -37,27 +42,32 @@ const Table = (props) => {
     }
 
     const onUpdate = (e, note) => {
+        setNoteToUpdate(note)
+        setShow(true)
     }
 
     if (notesToRender.length > 0) {
         return (
-            <table className="table table-hover table-striped">
-                <thead><tr>
-                    <th>Id</th><th>Title</th><th>Message</th><th>Done</th><th>Delete</th><th>Update</th>
-                </tr></thead>
-                <tbody>
-                    {notesToRender.map(note => {
-                        return <tr className={note.done ? "checked" : "unchecked"} key={`${category.id}-${note.id}`}>
-                            <td>{note.id}</td>
-                            <td>{note.title}</td>
-                            <td>{note.message}</td>
-                            <td><input className="checkbox" type="checkbox" checked={note.done} onChange={(e) => onCheckbox(e, note)} /></td>
-                            <td><button className="btn-danger delete-btn" onClick={(e) => onDelete(e, note)}>✖</button></td>
-                            <td><button className="btn-primary update-btn" onClick={(e) => onUpdate(e, note)}>🖍</button></td>
-                        </tr>
-                    })}
-                </tbody>
-            </table>
+            <>
+                <table className="table table-hover table-striped">
+                    <thead><tr>
+                        <th>Id</th><th>Title</th><th>Message</th><th>Done</th><th>Delete</th><th>Update</th>
+                    </tr></thead>
+                    <tbody>
+                        {notesToRender.map(note => {
+                            return <tr className={note.done ? "checked" : "unchecked"} key={`${category.id}-${note.id}`}>
+                                <td>{note.id}</td>
+                                <td>{note.title}</td>
+                                <td>{note.message}</td>
+                                <td><input className="checkbox" type="checkbox" checked={note.done} onChange={(e) => onCheckbox(e, note)} /></td>
+                                <td><button className="btn-danger delete-btn" onClick={(e) => onDelete(e, note)}>✖</button></td>
+                                <td><button className="btn-primary update-btn" onClick={(e) => onUpdate(e, note)}>🖍</button></td>
+                            </tr>
+                        })}
+                    </tbody>
+                </table>
+                <UpdateNoteModal note={noteToUpdate} show={show} setShow={setShow} />
+            </>
         )
     } else {
         return <h4>😢 This category is empty! Add a note if you wish 😀</h4>
