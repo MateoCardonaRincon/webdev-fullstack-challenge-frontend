@@ -1,4 +1,4 @@
-import Table from "/src/components/Table"
+import NoteTable from "/src/components/NoteTable"
 import React, { useState, useContext } from 'react'
 import { Store } from '/src/context/StoreProvider'
 
@@ -37,7 +37,7 @@ const Dropdown = (props) => {
                 <div id="collapseOne" className={`accordion-collapse collapse ${toggle ? "show" : ""}`}>
 
                     <div className="accordion-body">
-                        <Table category={category} />
+                        <NoteTable category={category} />
                         <button className="btn-danger w-100 delete-btn"
                             type="button"
                             onClick={onDeleteCategory}>Delete Category</button>

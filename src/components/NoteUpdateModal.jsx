@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Button, Modal } from 'react-bootstrap'
-import UpdateNoteForm from "/src/components/UpdateNoteForm"
+import NoteUpdateForm from "/src/components/NoteUpdateForm"
 import { Store } from '/src/context/StoreProvider'
 
 const UpdateNoteModal = (props) => {
@@ -40,13 +40,16 @@ const UpdateNoteModal = (props) => {
     return (
         <>
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Update your note</Modal.Title>
+                <Modal.Header>
+                    <Modal.Title>
+                        <h5>{`Updating note with id ${note.id}`}</h5>
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <h6>You can update the title and message:</h6>
-                    <UpdateNoteForm newTitle={noteTitle} newMessage={noteMessage}
-                        setNewTitle={setNewTitle} setNewMessage={setNewMessage} />
+                    <NoteUpdateForm note={note}
+                        setNewTitle={setNewTitle}
+                        setNewMessage={setNewMessage} />
 
                 </Modal.Body>
                 <Modal.Footer>

@@ -1,5 +1,5 @@
 import { StoreProvider } from "/src/context/StoreProvider"
-import NotesForm from "/src/components/NotesForm"
+import NoteForm from "/src/components/NoteForm"
 import CategoryList from "/src/components/CategoryList"
 import "./index.css"
 
@@ -11,7 +11,7 @@ function App() {
         <div className="d-flex justify-content-center">
           <h1>To Do List Manager</h1>
         </div>
-        <NotesForm />
+        <NoteForm />
         <CategoryList />
       </div>
     </StoreProvider>

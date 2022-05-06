@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react'
-import UpdateNoteModal from '/src/components/UpdateNoteModal'
+import NoteUpdateModal from '/src/components/NoteUpdateModal'
 import { Store } from '/src/context/StoreProvider'
 
-const Table = (props) => {
+const NoteTable = (props) => {
 
     const { category } = props
 
@@ -66,7 +66,7 @@ const Table = (props) => {
                         })}
                     </tbody>
                 </table>
-                <UpdateNoteModal note={noteToUpdate} show={show} setShow={setShow} />
+                <NoteUpdateModal note={noteToUpdate} show={show} setShow={setShow} />
             </>
         )
     } else {
@@ -74,4 +74,4 @@ const Table = (props) => {
     }
 }
 
-export default Table
+export default NoteTable

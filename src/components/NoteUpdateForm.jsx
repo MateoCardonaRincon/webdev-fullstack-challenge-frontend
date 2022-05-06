@@ -1,8 +1,8 @@
 import React from 'react'
 
-const UpdateNoteForm = (props) => {
+const NoteUpdateForm = (props) => {
 
-    const { newTitle, setNewTitle, newMessage, setNewMessage } = props
+    const { note, setNewTitle, setNewMessage } = props
 
     const addNewTitle = (event) => {
         setNewTitle(event.target.value)
@@ -21,14 +21,12 @@ const UpdateNoteForm = (props) => {
                         <label className="form-label">Title:</label>
                         <input className="form-control" type="text"
                             name="title" onChange={addNewTitle}
-                            value={newTitle}
-                            placeholder={newTitle}
+                            placeholder="Type a new title"
                             required />
                         <label className="form-label mt-3">Message:</label>
                         <input className="form-control" type="text"
                             name="message" onChange={addNewMessage}
-                            value={newTitle}
-                            placeholder={newMessage}
+                            placeholder="Type a new messagee"
                             required />
                     </div>
                 </div>
@@ -37,4 +35,4 @@ const UpdateNoteForm = (props) => {
     )
 }
 
-export default UpdateNoteForm
+export default NoteUpdateForm
