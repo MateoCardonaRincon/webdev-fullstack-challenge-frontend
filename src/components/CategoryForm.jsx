@@ -26,12 +26,11 @@ const CategoryForm = () => {
                 body: JSON.stringify(categoryFromForm)
             }).then(response => response.json());
 
-            // Reset input values of the Form component   
-            formRef.current.reset()
-            setCategoryDescription('')
-
             dispatch({ type: "add-category", payload: categorySaved })
         }
+        // Reset input values of the Form component   
+        formRef.current.reset()
+        setCategoryDescription('')
     }
 
     const addCategory = (event) => {
@@ -44,7 +43,7 @@ const CategoryForm = () => {
                 <div className="container w-50 mt-5">
 
                     <div className="row mb-3">
-                        <label className="form-label">Create a new category:</label>
+                        <label className="form-label label">Create a new category:</label>
                         <input className="form-control" type="text"
                             name="category" onChange={addCategory}
                             placeholder="Type a description"

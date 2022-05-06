@@ -46,11 +46,12 @@ const NotesForm = () => {
             }).then(response => response.json());
 
             dispatch({ type: "add-note", payload: noteSaved })
-
-            // Reset input values of the Form component   
-            formRef.current.reset()
-            setCategory('')
         }
+        // Reset input values of the Form component   
+        formRef.current.reset()
+        setTitle('')
+        setMessage('')
+        setCategory('')
     }
 
     return (
