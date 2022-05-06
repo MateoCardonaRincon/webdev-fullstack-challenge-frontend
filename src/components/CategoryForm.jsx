@@ -11,7 +11,10 @@ const CategoryForm = () => {
 
     const onAddCategory = async (event) => {
         event.preventDefault();
-        if (categoryDescription) {
+
+        let currentCategoryDescriptions = state.categories.map(category => category.description)
+
+        if (categoryDescription && !currentCategoryDescriptions.includes(categoryDescription)) {
 
             const categoryFromForm = { description: categoryDescription }
 
@@ -23,11 +26,11 @@ const CategoryForm = () => {
                 body: JSON.stringify(categoryFromForm)
             }).then(response => response.json());
 
-            dispatch({ type: "add-category", payload: categorySaved })
-
             // Reset input values of the Form component   
             formRef.current.reset()
             setCategoryDescription('')
+
+            dispatch({ type: "add-category", payload: categorySaved })
         }
     }
 
@@ -36,19 +39,23 @@ const CategoryForm = () => {
     }
 
     return (
-        <form className="form" ref={formRef}>
-            <div className="container w-50 mt-5">
+        <>
+            <form className="form" ref={formRef}>
+                <div className="container w-50 mt-5">
 
-                <div className="row mb-3">
-                    <label className="form-label">Create a new category:</label>
-                    <input className="form-control" type="text" name="category" onChange={addCategory} />
+                    <div className="row mb-3">
+                        <label className="form-label">Create a new category:</label>
+                        <input className="form-control" type="text"
+                            name="category" onChange={addCategory}
+                            placeholder="Type a description"
+                            required />
+                    </div>
+                    <div className="row mb-3">
+                        <button className="btn btn-primary" type="submit" onClick={onAddCategory}>Add</button>
+                    </div>
                 </div>
-
-                <div className="row mb-3">
-                    <button className="btn btn-primary" onClick={onAddCategory}>Add</button>
-                </div>
-            </div>
-        </form >
+            </form >
+        </>
     )
 }
 

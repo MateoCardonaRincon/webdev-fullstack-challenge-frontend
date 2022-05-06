@@ -17,7 +17,7 @@ const Dropdown = (props) => {
     const onDeleteCategory = async () => {
         let response = await fetch(`http://localhost:8081/api/delete/category/${category.id}`,
             { method: "DELETE" });
-
+            
         // checks if the note was succesfully deleted on the DB, if so, the dispatch is triggered
         if (response.status === 200) {
             dispatch({ type: "delete-category", payload: category })

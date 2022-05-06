@@ -61,12 +61,14 @@ const NotesForm = () => {
 
                     <div className="row mb-3">
                         <label className="form-label label">Title:</label>
-                        <input className="form-control" type="text" name="title" onChange={addTitle} />
+                        <input className="form-control" type="text" name="title" onChange={addTitle}
+                            placeholder="Type a short descriptive title" />
                     </div>
 
                     <div className="row mb-3">
                         <label className="form-label label">Message:</label>
-                        <input className="form-control" type="text" name="message" onChange={addMessage} />
+                        <input className="form-control" type="text" name="message" onChange={addMessage}
+                            placeholder="Type some message for your new note" />
                     </div>
 
                     <div className="row mb-3">
