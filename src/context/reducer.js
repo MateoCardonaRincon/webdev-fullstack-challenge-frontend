@@ -1,5 +1,5 @@
 // This is the reducer function that is triggered by the context dispatcher
-// Reduces the dispatch call to one of four cases:
+// Reduces the dispatch call to one of seven cases:
 //      get-categories: to set the state.categories after fetching all the categories from the DB
 //      get-notes: to set the state.notes after fetching all the notes from the DB
 //      add-category: to add a new gategory to the state.categories

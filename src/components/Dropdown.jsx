@@ -6,7 +6,7 @@ const Dropdown = (props) => {
 
     const { category } = props
 
-    const { state, dispatch } = useContext(Store)
+    const { dispatch } = useContext(Store)
 
     const [toggle, setToggle] = useState(false)
 
@@ -18,7 +18,7 @@ const Dropdown = (props) => {
         let response = await fetch(`http://localhost:8081/api/delete/category/${category.id}`,
             { method: "DELETE" });
             
-        // checks if the note was succesfully deleted on the DB, if so, the dispatch is triggered
+        // checks if the note was succesfully deleted on the DB, if so the dispatch is triggered
         if (response.status === 200) {
             dispatch({ type: "delete-category", payload: category })
         }
@@ -26,14 +26,12 @@ const Dropdown = (props) => {
 
     return (
         <div className="row">
-            <div className="accordion-item mb-2">
-                <h2 className="accordion-header justify-content-around">
+            <div className="accordion-item mb-3">
                     <button className="accordion-button category-dropdown"
                         type="button"
                         onClick={toggleCollapse}>
                         {category.description}
                     </button>
-                </h2>
                 <div id="collapseOne" className={`accordion-collapse collapse ${toggle ? "show" : ""}`}>
 
                     <div className="accordion-body">

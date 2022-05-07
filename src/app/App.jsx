@@ -1,24 +1,23 @@
 import { StoreProvider } from "/src/context/StoreProvider"
 import Header from "/src/components/Header"
-import NoteForm from "/src/components/NoteForm"
-import CategoryList from "/src/components/CategoryList"
+import MainPage from "/src/components/pages/MainPage"
+import About from "/src/components/pages/About"
+import NotFound from "/src/components/pages/NotFound"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import "./index.css"
 
 function App() {
 
   return (
-    <>
+    <BrowserRouter>
       <Header />
-      <StoreProvider>
-        <div className="container">
-          <div className="d-flex justify-content-center">
-            <h1>To Do List Manager</h1>
-          </div>
-          <NoteForm />
-          <CategoryList />
-        </div>
-      </StoreProvider>
-    </>
+      <Routes>
+        <Route path="/" element={<MainPage />} exact />
+        <Route path="/about" element={<About />} />
+        <Route path="/notfound" element={<NotFound />} />
+        <Route path='*' element={<Navigate to="notfound" />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

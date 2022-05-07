@@ -7,23 +7,16 @@ const CategoryList = () => {
 
     const { state, dispatch } = useContext(Store)
 
+    // Loads the categories and notes (through the backend DTOs) when the component is first rendered
     useEffect(() => {
         fetchAllCategories().then(
             category => {
-                let action = {
-                    type: "get-categories",
-                    payload: category
-                }
-                dispatch(action)
+                dispatch({ type: "get-categories", payload: category })
             })
 
         fetchAllNotes().then(
             notes => {
-                let action = {
-                    type: "get-notes",
-                    payload: notes
-                }
-                dispatch(action)
+                dispatch({ type: "get-notes", payload: notes })
             })
     }, [])
 

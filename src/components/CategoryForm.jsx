@@ -14,6 +14,8 @@ const CategoryForm = () => {
 
         let currentCategoryDescriptions = state.categories.map(category => category.description)
 
+        // Validates if the new category is not null and if exists another category
+        // with the same name already exist, and if is not null
         if (categoryDescription && !currentCategoryDescriptions.includes(categoryDescription)) {
 
             const categoryFromForm = { description: categoryDescription }
@@ -28,11 +30,12 @@ const CategoryForm = () => {
 
             dispatch({ type: "add-category", payload: categorySaved })
         }
-        // Reset input values of the Form component   
+        // Reset input values  
         formRef.current.reset()
         setCategoryDescription('')
     }
 
+    // updates local state categoryDescription
     const addCategory = (event) => {
         setCategoryDescription(event.target.value)
     }
@@ -41,7 +44,6 @@ const CategoryForm = () => {
         <>
             <form className="form" ref={formRef}>
                 <div className="container w-50 mt-5">
-
                     <div className="row mb-3">
                         <label className="form-label label">Create a new category:</label>
                         <input className="form-control" type="text"
@@ -50,7 +52,7 @@ const CategoryForm = () => {
                             required />
                     </div>
                     <div className="row mb-3">
-                        <button className="btn btn-primary" type="submit" onClick={onAddCategory}>Add</button>
+                        <button className="btn btn-primary" type="submit" onClick={onAddCategory}>Add Category</button>
                     </div>
                 </div>
             </form >

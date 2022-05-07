@@ -7,7 +7,7 @@ const UpdateNoteModal = (props) => {
 
     const { note, show, setShow } = props
 
-    const { state, dispatch } = useContext(Store)
+    const { dispatch } = useContext(Store)
 
     const [newTitle, setNewTitle] = useState('')
 
@@ -27,6 +27,8 @@ const UpdateNoteModal = (props) => {
             }).then(response => response.json());
 
             dispatch({ type: "update-note", payload: noteUpdated })
+
+            // resets the local state and close the modal if the update was successfull
             setShow(false)
             setNewTitle('')
             setNewMessage('')
@@ -64,11 +66,6 @@ const UpdateNoteModal = (props) => {
                 </Modal.Footer>
             </Modal>
         </>
-    )
-
-
-    return (
-        <Modal />
     )
 }
 

@@ -4,23 +4,29 @@ const NoteUpdateForm = (props) => {
 
     const { note, newTitle, newMessage, setNewTitle, setNewMessage } = props
 
+    // before the form is rendered, the title and message of the note that will be rendered
+    // are loaded in the inputs
     useEffect(() => {
         setNewTitle(note.title)
         setNewMessage(note.message)
     }, [])
 
+    // sets the value of the title that will be updated
     const addNewTitle = (event) => {
         setNewTitle(event.target.value)
     }
 
+    // sets the value of the message that will be updated
     const addNewMessage = (event) => {
         setNewMessage(event.target.value)
     }
 
+    // loads the current title if the user modified it but then want to keep the same title
     const loadCurrentTitle = () => {
         setNewTitle(note.title)
     }
 
+    // loads the current message if the user modified it but then want to keep the same title
     const loadCurrentMessage = () => {
         setNewMessage(note.message)
     }

@@ -8,12 +8,16 @@ const NoteTable = (props) => {
 
     const { state, dispatch } = useContext(Store)
 
+    // hook to show/hide the note update modal
     const [show, setShow] = useState(false);
 
+    // stores the note that will be updated and send it through the props of the modal
     const [noteToUpdate, setNoteToUpdate] = useState({});
 
+    // notes that will be rendered in the current category
     const notesToRender = state.notes.filter(note => note.fkCategoryId === category.id)
 
+    // sends a put request to update the done attribute of a note
     const onCheckbox = async (event, note) => {
         const isChecked = event.currentTarget.checked;
 
@@ -31,6 +35,7 @@ const NoteTable = (props) => {
         dispatch({ type: "update-note", payload: noteUpdated })
     }
 
+    // sends a delete request of a note by its id
     const onDelete = async (e, note) => {
         let response = await fetch(`http://localhost:8081/api/delete/note/${note.id}`,
             { method: "DELETE" });
@@ -41,15 +46,17 @@ const NoteTable = (props) => {
         }
     }
 
+    // shows the modal to update a note, setting the note that will be updated
     const onUpdate = (e, note) => {
         setNoteToUpdate(note)
         setShow(true)
     }
 
+    // conditional rendering: if a category has not notes, show an alternative message
     if (notesToRender.length > 0) {
         return (
             <>
-                <table className="table table-hover table-striped">
+                <table className="table table-hover table-striped table-borderless">
                     <thead><tr>
                         <th>Id</th><th>Title</th><th>Message</th><th>Done</th><th>Delete</th><th>Update</th>
                     </tr></thead>
@@ -61,7 +68,8 @@ const NoteTable = (props) => {
                                 <td>{note.message}</td>
                                 <td><input className="checkbox" type="checkbox" checked={note.done} onChange={(e) => onCheckbox(e, note)} /></td>
                                 <td><button className="btn-danger delete-btn" onClick={(e) => onDelete(e, note)}>✖</button></td>
-                                <td><button className="btn-primary update-btn" onClick={(e) => onUpdate(e, note)}>🖍</button></td>
+                                <td><button className={"btn-primary update-btn"}  disabled={note.done}
+                                    onClick={(e) => onUpdate(e, note)}>🖍</button></td>
                             </tr>
                         })}
                     </tbody>

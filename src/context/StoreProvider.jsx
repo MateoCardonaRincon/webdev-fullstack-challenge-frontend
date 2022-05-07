@@ -1,8 +1,8 @@
 import { createContext, useReducer } from "react"
 import reducer from "/src/context/reducer"
 
-// This state going to be updated once the app is rendered, then a GET request to the DB is done
-// After that, the fetched data is send through the dispatch to apdate this context state
+// This state going to be updated once the app is first rendered, after a GET request to the DB
+// The fetched data is send through the dispatch to apdate this context state
 const initialState = {
     categories: [],
     notes: []

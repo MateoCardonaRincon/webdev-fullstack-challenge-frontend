@@ -20,18 +20,18 @@ const NotesForm = () => {
         setTitle(event.target.value)
     }
 
-    // set the value of the message through the useState hook, taking the onChange event value
+    // set the value of the message taking the onChange event value
     const addMessage = (event) => {
         setMessage(event.target.value)
     }
 
-    // set the value of the category through the useState hook, taking the onChange event value
+    // set the value of the category taking the onChange event value
     const addCategory = (event) => {
         setCategory(parseInt(event.target.value))
     }
 
     // Triggers the dispatch when a new note is added with not empty title, message and category
-    const onAdd = async (event) => {
+    const onAddNote = async (event) => {
         event.preventDefault();
         if (title && message && fkCategoryId) {
 
@@ -63,18 +63,18 @@ const NotesForm = () => {
                     <div className="row mb-3">
                         <label className="form-label label">Title:</label>
                         <input className="form-control" type="text" name="title" onChange={addTitle}
-                            placeholder="Type a short descriptive title" />
+                            placeholder="Type a short descriptive title" required />
                     </div>
 
                     <div className="row mb-3">
                         <label className="form-label label">Message:</label>
-                        <input className="form-control" type="text" name="message" onChange={addMessage}
-                            placeholder="Type some message for your new note" />
+                        <input className="form-control" type="input" name="message" onChange={addMessage}
+                            placeholder="Type some message for your new note" required />
                     </div>
 
                     <div className="row mb-3">
                         <label className="form-label label">Category:</label>
-                        <select className="form-select" type="select" name="category" onChange={addCategory} >
+                        <select className="form-select" type="select" name="category" onChange={addCategory} required >
                             <option value=''>Choose...</option>
                             {state.categories.map(category =>
                                 <option value={category.id} key={category.id}>{category.description}</option>
@@ -83,7 +83,7 @@ const NotesForm = () => {
                     </div>
 
                     <div className="row mb-3">
-                        <button className="btn btn-primary" onClick={onAdd}>Add</button>
+                        <button className="btn btn-primary" onClick={onAddNote}>Add Note</button>
                     </div>
                 </div>
             </form >
