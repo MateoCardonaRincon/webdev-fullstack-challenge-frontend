@@ -1,7 +1,8 @@
 # webdev-fullstack-challenge-frontend
 
 ### Steps to enjoy this to-do manager app:
-You need to be sure that your backend is running before start the client side of the application. If that is the case, lets follow the next steps
+You need to be sure that your backend is running before start the client side of the application, so lets set fisrt the backend, going to https://github.com/MateoCardonaRincon/webdev-fullstack-challenge-backend and following the instructions in the readme. <br>
+If you have the backend running already, lets follow the next steps
 #### 1. Clone this frontend repository (either in git bash or using your favorite terminal):
     git clone https://github.com/MateoCardonaRincon/webdev-fullstack-challenge-frontend.git
 #### 2. Open the cloned repository in your vscode IDE and install the dependencies (node_modules folder) by typing in your vscode terminal:
