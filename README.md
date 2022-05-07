@@ -1,7 +1,7 @@
 # webdev-fullstack-challenge-frontend
 
 ### Steps to enjoy this to-do manager app:
-You need to be sure that your backend is running before start the client side of the application, so lets set fisrt the backend, going to https://github.com/MateoCardonaRincon/webdev-fullstack-challenge-backend and following the instructions in the readme. <br>
+You need to be sure that your backend is running before start the client side of the application, so lets set first the backend, going to https://github.com/MateoCardonaRincon/webdev-fullstack-challenge-backend and following the instructions in the readme. <br>
 If you have the backend running already, lets follow the next steps
 #### 1. Clone this frontend repository (either in git bash or using your favorite terminal):
     git clone https://github.com/MateoCardonaRincon/webdev-fullstack-challenge-frontend.git
@@ -9,7 +9,7 @@ If you have the backend running already, lets follow the next steps
     npm install
 #### 3. Now, run the client by typing in the vscode terminal the next line command:
     npm run dev
-This step will start the application in a develoment build in the url http://localhost:3000/ by default, please make sure you are not running another app in this path,
+Please, make sure that you are located in the project folder in the terminal before run the prior steps. This last step will start the application in a develoment build in the url http://localhost:3000/ by default, please make sure you are not running another app in this path,
 since the backend is set to receive request from this local url. Open the specified url in your browser, and start creating your first to-do notes!
 
 ## Use Case:
@@ -29,8 +29,12 @@ but be careful because all the notes will go with it.
 
 If you want to take a look at the code of this project you will find three main folders (among other files):
  - app: for the main jsx files and style content
- - componets: for all the react components (and folder with three pages that gather these components)
+ - componets: for all the react components (and a folder with three pages that gather these components)
  - context: for the StoreProvider component and the reducer. <br>
+
+The frontend retrieves the Note and Category DTOs that were created in the backend, this way:
+ - For the CategoryDTO the client receives a list of CategoryDTO type objects as [ {id: 1, description: "My first category"}, {id: 2, description: "Another category"}, ...] (notice that the list of notes inside the original Category entity is skipped in this DTO.
+ - For the NoteDTO the client retrieves a list of NoteDTO type objects as [ {id: 1, title: "My first note", message: "Description of my first note", done: false, fkCategoryId: 1}, ...]. In this case, the original Note entity maps all its attributes to the NoteDTO. 
 
 The code has several comments that will give you a clue of what I'm implementing in each block of code,
 I hope you don't need them, since that means that my code is not a mess.
