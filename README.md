@@ -30,7 +30,8 @@ but be careful because all the notes will go with it.
 If you want to take a look at the code of this project you will find three main folders (among other files):
  - app: for the main jsx files and style content
  - componets: for all the react components (and folder with three pages that gather these components)
- - context: for the StoreProvider component and the reducer
+ - context: for the StoreProvider component and the reducer. <br>
+
 The code has several comments that will give you a clue of what I'm implementing in each block of code,
 I hope you don't need them, since that means that my code is not a mess.
 
