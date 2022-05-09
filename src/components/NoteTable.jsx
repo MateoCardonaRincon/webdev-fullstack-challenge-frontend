@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import NoteUpdateModal from '/src/components/NoteUpdateModal'
 import { Store } from '/src/context/StoreProvider'
+import { updateNote, deleteNote } from "/src/services/noteService"
 
 const NoteTable = (props) => {
 
@@ -19,26 +20,21 @@ const NoteTable = (props) => {
 
     // sends a put request to update the done attribute of a note
     const onCheckbox = async (event, note) => {
+
         const isChecked = event.currentTarget.checked;
 
         const noteUpdatedFromForm = { ...note, done: isChecked }
 
-        // here, promises are treated using async/await and .then() approaches
-        let noteUpdated = await fetch("http://localhost:8081/api/update/note", {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(noteUpdatedFromForm)
-        }).then(response => response.json());
+        // calling to note service
+        let noteUpdated = await updateNote(noteUpdatedFromForm)
 
         dispatch({ type: "update-note", payload: noteUpdated })
     }
 
     // sends a delete request of a note by its id
     const onDelete = async (e, note) => {
-        let response = await fetch(`http://localhost:8081/api/delete/note/${note.id}`,
-            { method: "DELETE" });
+        // calling note service
+        let response = await deleteNote(note);
 
         // checks if the note was succesfully deleted on the DB, if so, the dispatch is triggered
         if (response.status === 200) {
@@ -68,7 +64,7 @@ const NoteTable = (props) => {
                                 <td>{note.message}</td>
                                 <td><input className="checkbox" type="checkbox" checked={note.done} onChange={(e) => onCheckbox(e, note)} /></td>
                                 <td><button className="btn-danger delete-btn" onClick={(e) => onDelete(e, note)}>✖</button></td>
-                                <td><button className={"btn-primary update-btn"}  disabled={note.done}
+                                <td><button className={"btn-primary update-btn"} disabled={note.done}
                                     onClick={(e) => onUpdate(e, note)}>🖍</button></td>
                             </tr>
                         })}

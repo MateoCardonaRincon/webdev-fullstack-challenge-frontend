@@ -1,5 +1,6 @@
 import React, { useContext, useRef, useState } from 'react'
 import { Store } from "/src/context/StoreProvider"
+import { saveCategory } from "/src/services/categoryService"
 
 const CategoryForm = () => {
 
@@ -20,15 +21,10 @@ const CategoryForm = () => {
 
             const categoryFromForm = { description: categoryDescription }
 
-            let categorySaved = await fetch("http://localhost:8081/api/save/category", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(categoryFromForm)
-            }).then(response => response.json());
+            // calling the saveCategory service 
+            let categoryToSave = await saveCategory(categoryFromForm)
 
-            dispatch({ type: "add-category", payload: categorySaved })
+            dispatch({ type: "add-category", payload: categoryToSave })
         }
         // Reset input values  
         formRef.current.reset()

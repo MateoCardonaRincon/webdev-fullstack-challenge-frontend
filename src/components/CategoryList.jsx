@@ -2,6 +2,8 @@ import { Store } from '/src/context/StoreProvider'
 import React, { useContext, useEffect } from 'react'
 import Dropdown from "/src/components/Dropdown"
 import CategoryForm from "/src/components/CategoryForm"
+import { getNotes } from "/src/services/noteService"
+import { getCategories } from "/src/services/categoryService"
 
 const CategoryList = () => {
 
@@ -9,28 +11,16 @@ const CategoryList = () => {
 
     // Loads the categories and notes (through the backend DTOs) when the component is first rendered
     useEffect(() => {
-        fetchAllCategories().then(
+        getCategories().then(
             category => {
                 dispatch({ type: "get-categories", payload: category })
             })
 
-        fetchAllNotes().then(
+        getNotes().then(
             notes => {
                 dispatch({ type: "get-notes", payload: notes })
             })
     }, [])
-
-    const fetchAllCategories = async () => {
-        let response = await fetch("http://localhost:8081/api/get/categories")
-        let data = await response.json()
-        return data
-    }
-
-    const fetchAllNotes = async () => {
-        let response = await fetch("http://localhost:8081/api/get/notes")
-        let data = await response.json()
-        return data
-    }
 
     return (
         <div className="category-div">
@@ -43,7 +33,6 @@ const CategoryList = () => {
                 )}
             </div>
         </div>
-
     )
 }
 

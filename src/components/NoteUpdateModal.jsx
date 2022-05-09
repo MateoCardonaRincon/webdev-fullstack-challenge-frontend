@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import NoteUpdateForm from "/src/components/NoteUpdateForm"
 import { Store } from '/src/context/StoreProvider'
+import { updateNote } from "/src/services/noteService"
 
 const UpdateNoteModal = (props) => {
 
@@ -18,13 +19,8 @@ const UpdateNoteModal = (props) => {
         const noteUpdatedFromForm = { ...note, title: newTitle, message: newMessage }
 
         if (newTitle && newMessage) {
-            let noteUpdated = await fetch("http://localhost:8081/api/update/note", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(noteUpdatedFromForm)
-            }).then(response => response.json());
+            // calling to note service
+            let noteUpdated = await updateNote(noteUpdatedFromForm)
 
             dispatch({ type: "update-note", payload: noteUpdated })
 

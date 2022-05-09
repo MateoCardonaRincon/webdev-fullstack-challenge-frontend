@@ -1,6 +1,7 @@
 import NoteTable from "/src/components/NoteTable"
 import React, { useState, useContext } from 'react'
 import { Store } from '/src/context/StoreProvider'
+import { deleteCategory } from '/src/services/categoryService'
 
 const Dropdown = (props) => {
 
@@ -15,9 +16,9 @@ const Dropdown = (props) => {
     }
 
     const onDeleteCategory = async () => {
-        let response = await fetch(`http://localhost:8081/api/delete/category/${category.id}`,
-            { method: "DELETE" });
-            
+        // calling to category service
+        let response = await deleteCategory(category)
+
         // checks if the note was succesfully deleted on the DB, if so the dispatch is triggered
         if (response.status === 200) {
             dispatch({ type: "delete-category", payload: category })
@@ -27,11 +28,11 @@ const Dropdown = (props) => {
     return (
         <div className="row">
             <div className="accordion-item mb-3">
-                    <button className="accordion-button category-dropdown"
-                        type="button"
-                        onClick={toggleCollapse}>
-                        {category.description}
-                    </button>
+                <button className="accordion-button category-dropdown"
+                    type="button"
+                    onClick={toggleCollapse}>
+                    {category.description}
+                </button>
                 <div id="collapseOne" className={`accordion-collapse collapse ${toggle ? "show" : ""}`}>
 
                     <div className="accordion-body">

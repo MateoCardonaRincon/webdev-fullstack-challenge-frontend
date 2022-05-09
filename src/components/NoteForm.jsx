@@ -1,5 +1,6 @@
 import React, { useContext, useRef, useState } from 'react'
 import { Store } from "/src/context/StoreProvider"
+import { saveNote } from "/src/services/noteService"
 
 const NotesForm = () => {
 
@@ -33,17 +34,12 @@ const NotesForm = () => {
     // Triggers the dispatch when a new note is added with not empty title, message and category
     const onAddNote = async (event) => {
         event.preventDefault();
+        
         if (title && message && fkCategoryId) {
 
             const noteFromForm = { title, message, fkCategoryId, done: false }
 
-            let noteSaved = await fetch("http://localhost:8081/api/save/note", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(noteFromForm)
-            }).then(response => response.json());
+            let noteSaved = await saveNote(noteFromForm);
 
             dispatch({ type: "add-note", payload: noteSaved })
         }
